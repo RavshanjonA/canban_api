@@ -35,7 +35,8 @@ DJANGO_APPS = [
 
 CUSTOM_APPS = [
     "apps.common",
-    'apps.users'
+    "apps.users",
+    "apps.canban",
 ]
 
 THIRD_PARTY_APPS = [
@@ -43,6 +44,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "drf_yasg",
     "corsheaders",
+    "captcha",
 ]
 
 REST_FRAMEWORK = {
