@@ -34,8 +34,6 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []  # type: List[str]
 
-    # bought_products
-
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")

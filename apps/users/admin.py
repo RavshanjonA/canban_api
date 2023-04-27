@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
         ("Details", {"fields": ("profile_photo", "first_name", "last_name", "gender")}),
     )
     search_fields = ('email',)
-    ordering = ('-created',)
+    ordering = ('-created_at',)
 
 
 admin.site.register(User, CustomUserAdmin)
