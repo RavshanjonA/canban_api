@@ -12,3 +12,4 @@ django-cors-headers==3.14.0
 django-simple-captcha==0.5.17
 django-phonenumber-field==7.1.0
 phonenumberslite==8.13.11
+django-recaptcha==3.0.0
