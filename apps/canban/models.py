@@ -6,7 +6,7 @@ from apps.common.models import BaseModel
 
 class Board(BaseModel):
     user = ForeignKey(verbose_name=_('Owner user'), to='users.User', related_name='boards', on_delete=CASCADE)
-    title = CharField(verbose_name=_('Board title'), max_length=256)
+    title = CharField(verbose_name=_('Board title'), max_length=256, unique=True)
     description = TextField(verbose_name=_('Description'), null=True, blank=True)
 
     # columns
@@ -21,7 +21,7 @@ class Board(BaseModel):
 
 class Column(BaseModel):
     board = ForeignKey(verbose_name=_('Parent board'), to='canban.Board', related_name='columns', on_delete=CASCADE)
-    title = CharField(verbose_name=_('Column title'), max_length=64)
+    title = CharField(verbose_name=_('Column title'), max_length=64, unique=True)
     description = TextField(verbose_name=_('Column description'), null=True, blank=True)
 
     class Meta:

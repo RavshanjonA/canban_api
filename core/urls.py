@@ -9,9 +9,10 @@ from core.schema import swagger_urlpatterns
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/v1/user/', include('apps.users.urls'), name='users'),
-    path('canban/', include('apps.canban.urls'), name='canban'),
+    # path('canban/', include('apps.canban.urls'), name='canban'),
 
     path("i18n/", include("django.conf.urls.i18n")),
+    path('api/v1/canban/', include('apps.canban.urls'), name='canban')
 ]
 urlpatterns += swagger_urlpatterns
 # urlpatterns += i18n_patterns(path("admin/", admin.site.urls))
