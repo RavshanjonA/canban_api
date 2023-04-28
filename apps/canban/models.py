@@ -1,47 +1,54 @@
-from django.db import models
 from django.db.models import CharField, TextField, ForeignKey, CASCADE
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
 
 
 class Board(BaseModel):
-    name = CharField(max_length=256)
-    description = TextField(null=True, blank=True)
+    title = CharField(verbose_name=_('Board title'), max_length=256)
+    description = TextField(verbose_name=_('Description'), null=True, blank=True)
 
     class Meta:
-        db_table = 'board'
-        verbose_name = "Board"
-        verbose_name_plural = "Boards"
+        verbose_name = _('Board')
+        verbose_name_plural = _('Boards')
+
+    def __str__(self):
+        return f"Board {self.title}"
 
 
-class Status(BaseModel):
-    board = ForeignKey('canban.Board', CASCADE, 'status')
-    name = CharField(max_length=256)
-    description = TextField(null=True, blank=True)
+class Column(BaseModel):
+    board = ForeignKey(verbose_name=_('Parent board'), to='canban.Board', related_name='columns', on_delete=CASCADE)
+    title = CharField(verbose_name=_('Column title'), max_length=64)
 
     class Meta:
-        db_table = 'ststus'
-        verbose_name = 'Status'
-        verbose_name_plural = 'Status'
+        verbose_name = _('Column')
+        verbose_name_plural = _('Columns')
+
+    def __str__(self):
+        return f"Column for the board {self.board.title}"
 
 
 class Task(BaseModel):
-    status = ForeignKey('canban.Status', CASCADE, 'tasks')
-    title = CharField(max_length=256)
-    description = TextField(null=True, blank=True)
+    column = ForeignKey(verbose_name=_('Parent column'), to='canban.Column', related_name='tasks', on_delete=CASCADE)
+    title = CharField(verbose_name=_('Task title'), max_length=256)
+    description = TextField(verbose_name=_('Task description'), null=True, blank=True)
 
     class Meta:
-        db_table = 'task'
-        verbose_name = 'Task'
-        verbose_name_plural = 'Tasks'
+        verbose_name = _('Task')
+        verbose_name_plural = _('Tasks')
+
+    def __str__(self):
+        return f"Task {self.id} - {self.title}"
 
 
 class Subtask(BaseModel):
-    task = ForeignKey('canban.Task', CASCADE, 'subtasks')
-    title = CharField(max_length=256)
-    description = TextField(null=True, blank=True)
+    task = ForeignKey(verbose_name=_('Subtask'), to='canban.Task', on_delete=CASCADE, related_name='subtasks')
+    title = CharField(verbose_name=_('Subtask title'), max_length=256)
+    description = TextField(verbose_name=_('Subtask description'), null=True, blank=True)
 
     class Meta:
-        db_table = 'subtask'
-        verbose_name = "Subtask"
-        verbose_name_plural = 'Subtasks'
+        verbose_name = _('Subtask')
+        verbose_name_plural = _('Subtasks')
+
+    def __str__(self):
+        return f"Subtask {self.id} - {self.title}"
