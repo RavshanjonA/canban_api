@@ -3,6 +3,7 @@ django-jazzmin==2.6.0
 django-filter==23.1
 drf-yasg==1.21.5
 djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
 phonenumbers==8.13.9
 Pillow==9.4.0
 python-environ==0.4.54
