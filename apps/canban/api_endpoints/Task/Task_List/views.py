@@ -10,6 +10,7 @@ class TaskListAPIView(ListAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskListSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
+    lookup_field = 'column_id'
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(column__board__user=self.request.user)
