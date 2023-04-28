@@ -5,8 +5,11 @@ from apps.common.models import BaseModel
 
 
 class Board(BaseModel):
+    user = ForeignKey(verbose_name=_('Owner user'), to='users.User', related_name='boards', on_delete=CASCADE)
     title = CharField(verbose_name=_('Board title'), max_length=256)
     description = TextField(verbose_name=_('Description'), null=True, blank=True)
+
+    # columns
 
     class Meta:
         verbose_name = _('Board')
