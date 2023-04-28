@@ -1,6 +1,6 @@
-from captcha import fields
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
+from captcha.fields import ReCaptchaField
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
 from .models import User
 
@@ -20,15 +20,15 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('email',)
 
 
-
 class LoginForm(AuthenticationForm):
-    captcha = fields.CaptchaField()
+    captcha = ReCaptchaField()
 
     def clean(self):
         captcha = self.cleaned_data.get("captcha")
         if not captcha:
             return
         return super().clean()
+
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:

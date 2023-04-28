@@ -3,9 +3,8 @@ from django.urls import path
 from apps.canban.api_endpoints.Board.Board_Create.views import BoardCreateAPIView
 from apps.canban.api_endpoints.Board.Board_Destroy.views import BoardDestroyAPIView
 from apps.canban.api_endpoints.Board.Board_List.views import BoardListAPIView
-from apps.canban.api_endpoints.Board.Board_Update.views import BoardUpdateAPIView
 from apps.canban.api_endpoints.Board.Board_Retrieve.views import BoardRetrieveAPIView
-
+from apps.canban.api_endpoints.Board.Board_Update.views import BoardUpdateAPIView
 from apps.canban.api_endpoints.Column.Column_Create.views import ColumnCreateAPIView
 from apps.canban.api_endpoints.Column.Column_Destroy.views import ColumnDestroyAPIView
 from apps.canban.api_endpoints.Column.Column_List.views import ColumnListAPIView
@@ -15,7 +14,7 @@ app_name = 'canban'
 
 urlpatterns = [
     path('boards/', BoardListAPIView.as_view(), name='boards_list'),
-    path('boards/<int:pk>', BoardListAPIView.as_view(), name='boards_retrieve'),
+    path('boards/<int:pk>', BoardRetrieveAPIView.as_view(), name='boards_retrieve'),
     path('boards/create/', BoardCreateAPIView.as_view(), name='boards_create'),
     path('boards/destroy/<int:pk>/', BoardDestroyAPIView.as_view(), name='boards_destroy'),
     path('boards/update/<int:pk>/', BoardUpdateAPIView.as_view(), name='boards_update'),
