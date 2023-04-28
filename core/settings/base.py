@@ -4,6 +4,7 @@ from pathlib import Path
 import environ
 import rest_framework.parsers
 import rest_framework.permissions
+from django.utils.translation import gettext_lazy as _
 
 from core.jazzmin_conf import *  # noqa
 
@@ -136,6 +137,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
+LANGUAGES = (
+    ("en", _("English")),
+    ("ru", _("Russian")),
+    ("uz", _("Uzbek"))
+)
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 TIME_ZONE = "Asia/Tashkent"
 
