@@ -1,19 +1,18 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from ....models import CartOrderItem
 from .permissions import IsTheOwner
-from .serializers import CartOrderItemListSerializer
+from .serializers import BoardRetrieveSerializer
+from ....models import Board
 
 
-class CartOrderItemListAPIView(ListAPIView):
-    queryset = CartOrderItem.objects.all()
-    serializer_class = CartOrderItemListSerializer
+class BoardRetrieveAPIView(RetrieveAPIView):
+    queryset = Board.objects.all()
+    serializer_class = BoardRetrieveSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
 
     def get_queryset(self):
-        user = self.request.user
-        self.queryset = self.queryset.filter(cart=user.cart)
+        self.queryset = self.queryset.filter(user=self.request.user)
 
 
-__all__ = ["CartOrderItemListAPIView"]
+__all__ = ["BoardRetrieveAPIView"]

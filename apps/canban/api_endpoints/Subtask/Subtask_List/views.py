@@ -1,19 +1,19 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from ....models import CartOrderItem
 from .permissions import IsTheOwner
-from .serializers import CartOrderItemListSerializer
+from .serializers import SubtaskListSerializer
+from ....models import Subtask
 
 
-class CartOrderItemListAPIView(ListAPIView):
-    queryset = CartOrderItem.objects.all()
-    serializer_class = CartOrderItemListSerializer
+class SubtaskListAPIView(ListAPIView):
+    queryset = Subtask.objects.all()
+    serializer_class = SubtaskListSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
 
     def get_queryset(self):
-        user = self.request.user
-        self.queryset = self.queryset.filter(cart=user.cart)
+        self.queryset = self.queryset.filter(task__column__board__user=self.request.user)
+    # todo add filter by task
 
 
-__all__ = ["CartOrderItemListAPIView"]
+__all__ = ["SubtaskListAPIView"]

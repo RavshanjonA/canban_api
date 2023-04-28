@@ -1,17 +1,15 @@
 from rest_framework.generics import UpdateAPIView
-from rest_framework.parsers import FormParser
 from rest_framework.permissions import IsAuthenticated
 
-from apps.cart.models import CartOrderItem
+from apps.canban.models import Subtask
 from .permissions import IsTheOwner
-from .serializers import CartOrderItemUpdateSerializer
+from .serializers import SubtaskUpdateSerializer
 
 
-class CartOrderItemUpdateAPIView(UpdateAPIView):
-    queryset = CartOrderItem.objects.all()
-    serializer_class = CartOrderItemUpdateSerializer
+class SubtaskUpdateAPIView(UpdateAPIView):
+    queryset = Subtask.objects.all()
+    serializer_class = SubtaskUpdateSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
-    parser_classes = [FormParser]
 
 
-__all__ = ["CartOrderItemUpdateAPIView"]
+__all__ = ["SubtaskUpdateAPIView"]

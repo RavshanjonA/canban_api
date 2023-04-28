@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from apps.cart.models import CartOrderItem
+from apps.canban.models import Subtask
 
 
-class CartOrderItemUpdateSerializer(serializers.ModelSerializer):
+class SubtaskUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CartOrderItem
-        fields = ["delivery_service", "quantity"]
+        model = Subtask
+        fields = ['title']

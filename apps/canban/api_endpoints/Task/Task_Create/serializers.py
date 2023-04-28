@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.cart.models import CartOrderItem
+from apps.canban.models import Task
 
 
-class CartOrderItemCreateSerializer(ModelSerializer):
+class TaskCreateSerializer(ModelSerializer):
     class Meta:
-        model = CartOrderItem
-        fields = ['product', 'delivery_service', 'quantity', 'price']
+        model = Task
+        fields = '__all__'
