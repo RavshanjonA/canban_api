@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-29 01:02+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\apps\canban\models.py:8
+msgid "Owner user"
+msgstr ""
+
+#: .\apps\canban\models.py:9
+msgid "Board title"
+msgstr ""
+
+#: .\apps\canban\models.py:10
+msgid "Description"
+msgstr ""
+
+#: .\apps\canban\models.py:15
+msgid "Board"
+msgstr ""
+
+#: .\apps\canban\models.py:16
+msgid "Boards"
+msgstr ""
+
+#: .\apps\canban\models.py:23
+msgid "Parent board"
+msgstr ""
+
+#: .\apps\canban\models.py:24
+msgid "Column title"
+msgstr ""
+
+#: .\apps\canban\models.py:25
+msgid "Column description"
+msgstr ""
+
+#: .\apps\canban\models.py:28
+msgid "Column"
+msgstr ""
+
+#: .\apps\canban\models.py:29
+msgid "Columns"
+msgstr ""
+
+#: .\apps\canban\models.py:36
+msgid "Parent column"
+msgstr ""
+
+#: .\apps\canban\models.py:37
+msgid "Task title"
+msgstr ""
+
+#: .\apps\canban\models.py:38
+msgid "Task description"
+msgstr ""
+
+#: .\apps\canban\models.py:41
+msgid "Task"
+msgstr ""
+
+#: .\apps\canban\models.py:42
+msgid "Tasks"
+msgstr ""
+
+#: .\apps\canban\models.py:49 .\apps\canban\models.py:53
+msgid "Subtask"
+msgstr ""
+
+#: .\apps\canban\models.py:50
+msgid "Subtask title"
+msgstr ""
+
+#: .\apps\canban\models.py:54
+msgid "Subtasks"
+msgstr ""
+
+#: .\apps\users\managers.py:8
+msgid "The email must be set"
+msgstr ""
+
+#: .\apps\users\models.py:15
+msgid "Username"
+msgstr ""
+
+#: .\apps\users\models.py:16
+msgid "Phone number"
+msgstr ""
+
+#: .\apps\users\models.py:17
+msgid "Email address"
+msgstr ""
+
+#: .\apps\users\models.py:19
+msgid "First name"
+msgstr ""
+
+#: .\apps\users\models.py:20
+msgid "Last name"
+msgstr ""
+
+#: .\apps\users\models.py:22
+msgid "Profile photo"
+msgstr ""
+
+#: .\apps\users\models.py:24
+msgid "Gender"
+msgstr ""
+
+#: .\apps\users\models.py:26
+msgid "Is staff?"
+msgstr ""
+
+#: .\apps\users\models.py:27
+msgid "Is active?"
+msgstr ""
+
+#: .\apps\users\models.py:28
+msgid "Is superuser?"
+msgstr ""
+
+#: .\apps\users\models.py:30
+msgid "Groups"
+msgstr ""
+
+#: .\apps\users\models.py:38
+msgid "User"
+msgstr ""
+
+#: .\apps\users\models.py:39
+msgid "Users"
+msgstr ""
+
+#: .\core\settings\base.py:152
+msgid "English"
+msgstr ""
+
+#: .\core\settings\base.py:153
+msgid "Русский"
+msgstr ""
+
+#: .\core\settings\base.py:154
+msgid "O'zbekcha"
+msgstr ""
+
+#: .\templates\login.html:15
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+
+#: .\templates\login.html:72
+msgid "Forgotten your password or username?"
+msgstr ""
+
+#: .\templates\login.html:80
+msgid "Log in"
+msgstr ""
