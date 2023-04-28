@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 import environ
+import rest_framework.parsers
+import rest_framework.permissions
 
 from core.jazzmin_conf import *  # noqa
 
@@ -50,10 +52,12 @@ THIRD_PARTY_APPS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.SessionAuthentication",),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",
         "rest_framework.filters.SearchFilter",
     ),
+    'DEFAULT_PARSER_CLASSES': ('rest_framework.parsers.FormParser', 'rest_framework.parsers.MultiPartParser'),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
 }
@@ -173,4 +177,3 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
-

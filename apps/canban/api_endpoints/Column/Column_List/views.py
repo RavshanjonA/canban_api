@@ -1,19 +1,19 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from ....models import CartOrderItem
 from .permissions import IsTheOwner
-from .serializers import CartOrderItemListSerializer
+from .serializers import ColumnListSerializer
+from ....models import Column
 
 
-class CartOrderItemListAPIView(ListAPIView):
-    queryset = CartOrderItem.objects.all()
-    serializer_class = CartOrderItemListSerializer
+class ColumnListAPIView(ListAPIView):
+    queryset = Column.objects.all()
+    serializer_class = ColumnListSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
+    lookup_field = 'board_id'
 
     def get_queryset(self):
-        user = self.request.user
-        self.queryset = self.queryset.filter(cart=user.cart)
+        self.queryset = self.queryset.filter(board__user=self.request.user)
 
 
-__all__ = ["CartOrderItemListAPIView"]
+__all__ = ["ColumnListAPIView"]

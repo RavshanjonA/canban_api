@@ -9,5 +9,8 @@ class ColumnDestroyAPIView(DestroyAPIView):
     queryset = Column.objects.all()
     permission_classes = [IsAuthenticated, IsTheOwner]
 
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(board__user=self.request.user)
+
 
 __all__ = ["ColumnDestroyAPIView"]
