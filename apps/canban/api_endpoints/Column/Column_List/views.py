@@ -13,7 +13,7 @@ class ColumnListAPIView(ListAPIView):
     lookup_field = 'board_id'
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(board__user=self.request.user)
+        return self.queryset.filter(board__user=self.request.user)
 
 
 __all__ = ["ColumnListAPIView"]

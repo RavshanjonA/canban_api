@@ -11,7 +11,8 @@ class BoardListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(user=self.request.user)
+        user = self.request.user
+        return self.queryset.filter(user=user)
 
 
 __all__ = ["BoardListAPIView"]

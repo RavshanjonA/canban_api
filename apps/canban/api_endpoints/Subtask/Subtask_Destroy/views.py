@@ -10,7 +10,7 @@ class SubtaskDestroyAPIView(DestroyAPIView):
     permission_classes = [IsAuthenticated, IsTheOwner]
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(task__column__board__user=self.request.user)
+        return self.queryset.filter(task__column__board__user=self.request.user)
 
 
 __all__ = ["SubtaskDestroyAPIView"]
