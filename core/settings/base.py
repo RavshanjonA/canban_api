@@ -42,6 +42,7 @@ CUSTOM_APPS = [
 THIRD_PARTY_APPS = [
     "jazzmin",
     "rest_framework",
+    'rest_framework_simplejwt',
     "drf_yasg",
     "corsheaders",
     "captcha",
@@ -93,12 +94,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 
 DATABASES = {
     "default": {
@@ -149,7 +144,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -169,14 +163,14 @@ CACHES = {
 }
 
 # CELERY CONFIGURATION
-# CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", "redis://localhost:6379")
-# CELERY_RESULT_BACKEND = env.str("CELERY_BROKER_URL", "redis://localhost:6379")
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", "redis://localhost:6379")
+CELERY_RESULT_BACKEND = env.str("CELERY_BROKER_URL", "redis://localhost:6379")
 
 CELERY_TIMEZONE = "Asia/Tashkent"
 
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
 
-RECAPTCHA_PUBLIC_KEY = '6Lcp3polAAAAAM8bkyhFL-3ekAunpk81WSNtWN24'
-RECAPTCHA_PRIVATE_KEY = '6Lcp3polAAAAAIQPhVjyzFMmPFekoxYgPn3UegpN'

@@ -7,9 +7,9 @@ from .generator import BothHttpAndHttpsSchemaGenerator
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Site API",
+        title="Canban API",
         default_version="v1",
-        description="Api",
+        description="Backend API for Canban Task Manager",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="info@uic.group"),
         license=openapi.License(name="BSD License"),
@@ -25,7 +25,7 @@ swagger_urlpatterns = [
         name="schema-json",
     ),
     re_path(
-        r"^swagger/$",
+        "",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
