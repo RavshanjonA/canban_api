@@ -22,6 +22,7 @@ class Board(BaseModel):
 class Column(BaseModel):
     board = ForeignKey(verbose_name=_('Parent board'), to='canban.Board', related_name='columns', on_delete=CASCADE)
     title = CharField(verbose_name=_('Column title'), max_length=64)
+    description = TextField(verbose_name=_('Column description'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('Column')
@@ -47,7 +48,6 @@ class Task(BaseModel):
 class Subtask(BaseModel):
     task = ForeignKey(verbose_name=_('Subtask'), to='canban.Task', on_delete=CASCADE, related_name='subtasks')
     title = CharField(verbose_name=_('Subtask title'), max_length=256)
-    description = TextField(verbose_name=_('Subtask description'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('Subtask')

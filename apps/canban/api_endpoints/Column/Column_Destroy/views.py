@@ -1,13 +1,13 @@
 from rest_framework.generics import DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from apps.cart.models import CartOrderItem
+from apps.canban.models import Column
 from .permissions import IsTheOwner
 
 
-class CartOrderItemDestroyAPIView(DestroyAPIView):
-    queryset = CartOrderItem.objects.all()
+class ColumnDestroyAPIView(DestroyAPIView):
+    queryset = Column.objects.all()
     permission_classes = [IsAuthenticated, IsTheOwner]
 
 
-__all__ = ["CartOrderItemDestroyAPIView"]
+__all__ = ["ColumnDestroyAPIView"]
