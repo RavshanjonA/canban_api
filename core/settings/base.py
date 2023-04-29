@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "corsheaders",
     "captcha",
+    'rosetta'
 ]
 
 REST_FRAMEWORK = {

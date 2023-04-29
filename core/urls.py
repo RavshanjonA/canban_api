@@ -9,6 +9,7 @@ from core.schema import swagger_urlpatterns
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
+    path('rosetta/', include('rosetta.urls')),
     path('api/v1/user/', include('apps.users.urls'), name='users'),
     path('api/v1/canban/', include('apps.canban.urls'), name='canban'),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
