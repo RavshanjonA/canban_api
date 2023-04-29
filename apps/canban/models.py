@@ -9,8 +9,6 @@ class Board(BaseModel):
     title = CharField(verbose_name=_('Board title'), max_length=256, unique=True)
     description = TextField(verbose_name=_('Description'), null=True, blank=True)
 
-    # columns
-
     class Meta:
         verbose_name = _('Board')
         verbose_name_plural = _('Boards')
@@ -29,7 +27,7 @@ class Column(BaseModel):
         verbose_name_plural = _('Columns')
 
     def __str__(self):
-        return f"Column for the board {self.board.title}"
+        return f"Column for the board {self.board.title} {self.title}"
 
 
 class Task(BaseModel):
@@ -42,7 +40,7 @@ class Task(BaseModel):
         verbose_name_plural = _('Tasks')
 
     def __str__(self):
-        return f"Task {self.id} - {self.title}"
+        return f"Task {self.id} - {self.title} "
 
 
 class Subtask(BaseModel):
