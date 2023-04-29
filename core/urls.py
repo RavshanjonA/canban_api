@@ -14,7 +14,6 @@ urlpatterns = [
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token-verify'),
-
 ]
 urlpatterns += swagger_urlpatterns
 # urlpatterns += i18n_patterns(path("admin/", admin.site.urls))
