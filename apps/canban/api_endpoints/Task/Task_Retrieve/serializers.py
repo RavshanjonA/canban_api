@@ -6,5 +6,4 @@ from apps.canban.models import Task
 class TaskRetrieveSerializer(ModelSerializer):
     class Meta:
         model = Task
-        fields = ['title', 'description', ]  # subtasks
-        # todo Subtasks nested serializer
+        fields = ['id', 'title', 'description']

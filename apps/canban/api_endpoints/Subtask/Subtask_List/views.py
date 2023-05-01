@@ -10,10 +10,7 @@ class SubtaskListAPIView(ListAPIView):
     queryset = Subtask.objects.all()
     serializer_class = SubtaskListSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
-
-    def get_queryset(self):
-        return self.queryset.filter(task__column__board__user=self.request.user)
-    # todo add filter by task
+    lookup_field = 'task_id'
 
 
 __all__ = ["SubtaskListAPIView"]

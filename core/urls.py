@@ -1,7 +1,10 @@
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.urls import path, include
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from core.schema import swagger_urlpatterns
 
@@ -11,6 +14,12 @@ urlpatterns = [
     # path('canban/', include('apps.canban.urls'), name='canban'),
 
     path("i18n/", include("django.conf.urls.i18n")),
+    path('rosetta/', include('rosetta.urls')),
+    path('api/v1/user/', include('apps.users.urls'), name='users'),
+    path('api/v1/canban/', include('apps.canban.urls'), name='canban'),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token-verify'),
     path('api/v1/canban/', include('apps.canban.urls'), name='canban'),
     path('api/v1/social-auth/', include('apps.social_auth.urls'), name='social_auth'),
 
