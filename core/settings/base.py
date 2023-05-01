@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 DJANGO_APPS = [
     "modeltranslation",
 
+    "rosetta",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,6 +44,7 @@ CUSTOM_APPS = [
     "apps.common",
     "apps.users",
     "apps.canban",
+    "apps.social_auth.apps.SocialAuthConfig",
 ]
 
 THIRD_PARTY_APPS = [
@@ -52,7 +54,7 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "corsheaders",
     "captcha",
-    'rosetta',
+
 ]
 
 REST_FRAMEWORK = {
@@ -166,7 +168,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -179,8 +180,6 @@ def gettext(s):
     return s
 
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
-MODELTRANSLATION_LANGUAGES = ("en", "ru", "uz")
 MODELTRANSLATION_FALLBACK_LANGUAGES = {
     "default": ("en", "uz", "ru"),
     "en": ("en", "uz", "ru"),
@@ -281,6 +280,8 @@ AUTHENTICATION_BACKENDS = (
     "social_core.backends.google.GoogleOAuth2",
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
+    "apps.users.authentications.UsernameAuthBackend",
+    "apps.users.authentications.PhoneNumberAuthBackend",
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", "")  # noqa
@@ -296,9 +297,4 @@ OAUTH_CALLBACK_URL = f"{env.str('HOST', '')}"
 
 REST_USE_JWT = True
 
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "apps.users.authentications.UsernameAuthBackend",
-    "apps.users.authentications.PhoneNumberAuthBackend",
-]
-AUTH_USER_MODEL = 'users.User'
+
