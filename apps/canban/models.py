@@ -7,7 +7,6 @@ from apps.common.models import BaseModel
 class Board(BaseModel):
     user = ForeignKey(verbose_name=_('Owner user'), to='users.User', related_name='boards', on_delete=CASCADE)
     title = CharField(verbose_name=_('Board title'), max_length=256, unique=True)
-    description = TextField(verbose_name=_('Description'), null=True, blank=True)
 
     # columns
 
@@ -20,9 +19,8 @@ class Board(BaseModel):
 
 
 class Column(BaseModel):
-    board = ForeignKey(verbose_name=_('Parent board'), to='canban.Board', related_name='columns', on_delete=CASCADE)
-    title = CharField(verbose_name=_('Column title'), max_length=64, unique=True)
-    description = TextField(verbose_name=_('Column description'), null=True, blank=True)
+    board = ForeignKey(verbose_name=_('Board'), to='canban.Board', related_name='columns', on_delete=CASCADE)
+    title = CharField(verbose_name=_('Title'), max_length=64, unique=True)
 
     class Meta:
         verbose_name = _('Column')
@@ -33,9 +31,9 @@ class Column(BaseModel):
 
 
 class Task(BaseModel):
-    column = ForeignKey(verbose_name=_('Parent column'), to='canban.Column', related_name='tasks', on_delete=CASCADE)
-    title = CharField(verbose_name=_('Task title'), max_length=256)
-    description = TextField(verbose_name=_('Task description'), null=True, blank=True)
+    column = ForeignKey(verbose_name=_('Column'), to='canban.Column', related_name='tasks', on_delete=CASCADE)
+    title = CharField(verbose_name=_('Title'), max_length=256)
+    description = TextField(verbose_name=_('Description'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('Task')
@@ -47,7 +45,7 @@ class Task(BaseModel):
 
 class Subtask(BaseModel):
     task = ForeignKey(verbose_name=_('Subtask'), to='canban.Task', on_delete=CASCADE, related_name='subtasks')
-    title = CharField(verbose_name=_('Subtask title'), max_length=256)
+    title = CharField(verbose_name=_('Title'), max_length=256)
 
     class Meta:
         verbose_name = _('Subtask')

@@ -1,11 +1,11 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 import environ
 import rest_framework.parsers
 import rest_framework.permissions
 from django.utils.translation import gettext_lazy as _
-from datetime import timedelta
 
 from core.jazzmin_conf import *  # noqa
 
@@ -51,7 +51,7 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "corsheaders",
     "captcha",
-    'rosetta'
+    'rosetta',
 ]
 
 REST_FRAMEWORK = {
@@ -148,8 +148,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 
-AUTH_USER_MODEL = 'users.User'
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -165,8 +163,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
+
+
+def gettext(s):
+    return s
 
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
@@ -183,10 +186,6 @@ MODELTRANSLATION_LANGUAGES_CHOICES = (
     ("uz", _("Uzbek")),
 )
 
-def gettext(s):
-    return s
-
-
 LANGUAGES = (
     ("en", gettext("English")),
     ("ru", gettext("Русский")),
@@ -196,9 +195,9 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Asia/Tashkent"
-
 USE_I18N = True
+
+TIME_ZONE = "Asia/Tashkent"
 
 USE_TZ = True
 
@@ -242,3 +241,4 @@ AUTHENTICATION_BACKENDS = [
     "apps.users.authentications.UsernameAuthBackend",
     "apps.users.authentications.PhoneNumberAuthBackend",
 ]
+AUTH_USER_MODEL = 'users.User'

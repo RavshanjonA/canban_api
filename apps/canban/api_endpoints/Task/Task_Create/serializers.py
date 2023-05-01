@@ -6,4 +6,4 @@ from apps.canban.models import Task
 class TaskCreateSerializer(ModelSerializer):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['column', 'title', 'description']

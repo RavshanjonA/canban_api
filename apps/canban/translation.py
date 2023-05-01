@@ -5,28 +5,22 @@ from apps.canban.models import Board, Column, Task, Subtask
 
 # for Person model
 class BoardTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
-
-
-translator.register(Board, BoardTranslationOptions)
+    fields = ('title',)
 
 
 class ColumnTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
-
-
-translator.register(Column, ColumnTranslationOptions)
+    fields = ('title',)
 
 
 class TaskTranslationOptions(TranslationOptions):
     fields = ('title', 'description')
 
 
-translator.register(Task, TaskTranslationOptions)
-
-
 class SubtaskTranslationOptions(TranslationOptions):
     fields = ('title',)
 
 
+translator.register(Board, BoardTranslationOptions)
+translator.register(Column, ColumnTranslationOptions)
+translator.register(Task, TaskTranslationOptions)
 translator.register(Subtask, SubtaskTranslationOptions)
