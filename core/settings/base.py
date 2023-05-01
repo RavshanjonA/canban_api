@@ -51,9 +51,17 @@ THIRD_PARTY_APPS = [
     "jazzmin",
     "rest_framework",
     'rest_framework_simplejwt',
+    "rest_framework.authtoken",
     "drf_yasg",
     "corsheaders",
     "captcha",
+    "social_django",
+    "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.apple",
 
 ]
 
@@ -296,5 +304,3 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 OAUTH_CALLBACK_URL = f"{env.str('HOST', '')}"
 
 REST_USE_JWT = True
-
-
