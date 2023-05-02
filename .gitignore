@@ -23,6 +23,8 @@ media
 # C extensions
 *.so
 
+trash/
+
 # Distribution / packaging
 .Python
 build/

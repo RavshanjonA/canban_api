@@ -23,6 +23,9 @@ urlpatterns = [
     # path('dj-rest-auth/', include('dj_rest_auth.urls')),
 ]
 urlpatterns += swagger_urlpatterns
+urlpatterns += [
+    path('captcha/', include('captcha.urls')),
+]
 # urlpatterns += i18n_patterns(path("admin/", admin.site.urls))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
