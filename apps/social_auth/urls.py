@@ -6,5 +6,5 @@ app_name = "social-auth"
 
 urlpatterns = [
     path("GoogleLogin", views.GoogleLogin.as_view(), name="GoogleLogin"),
-    path("FacebookLogin", views.FacebookLogin.as_view(), name="FacebookLogin"),
+    # path("FacebookLogin", views.FacebookLogin.as_view(), name="FacebookLogin"),
 ]

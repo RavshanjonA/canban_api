@@ -1,8 +1,6 @@
 from django.conf import settings
-from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
-
 from django.urls import path, include, re_path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
@@ -22,6 +20,7 @@ urlpatterns = [
 
     # social auth
     re_path(r"^accounts/", include("allauth.urls"), name="socialaccount_signup"),
+    # path('dj-rest-auth/', include('dj_rest_auth.urls')),
 ]
 urlpatterns += swagger_urlpatterns
 # urlpatterns += i18n_patterns(path("admin/", admin.site.urls))

@@ -61,7 +61,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.apple",
+    "allauth.socialaccount.providers.facebook",
 
 ]
 
