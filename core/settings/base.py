@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -29,6 +30,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 DJANGO_APPS = [
     "modeltranslation",
+
+    "rosetta",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,19 +44,32 @@ CUSTOM_APPS = [
     "apps.common",
     "apps.users",
     "apps.canban",
+    "apps.social_auth.apps.SocialAuthConfig",
 ]
 
 THIRD_PARTY_APPS = [
     "jazzmin",
     "rest_framework",
     'rest_framework_simplejwt',
+    "rest_framework.authtoken",
     "drf_yasg",
     "corsheaders",
     "captcha",
+    "social_django",
+    "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.apple",
+
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ('rest_framework_simplejwt.authentication.JWTAuthentication', "rest_framework.authentication.SessionAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        "rest_framework.authentication.SessionAuthentication",
+    ),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",
@@ -65,7 +81,32 @@ REST_FRAMEWORK = {
 }
 
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + CUSTOM_APPS
-
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "UPDATE_LAST_LOGIN": False,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": None,
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "JWK_URL": None,
+    "LEEWAY": 0,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+    "JTI_CLAIM": "jti",
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": timedelta(days=1),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=10),
+}
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -147,6 +188,18 @@ def gettext(s):
     return s
 
 
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    "default": ("en", "uz", "ru"),
+    "en": ("en", "uz", "ru"),
+    "uz": ("uz", "en", "ru"),
+    "ru": ("ru", "en", "uz"),
+}
+MODELTRANSLATION_LANGUAGES_CHOICES = (
+    ("en", _("English")),
+    ("ru", _("Russian")),
+    ("uz", _("Uzbek")),
+)
+
 LANGUAGES = (
     ("en", gettext("English")),
     ("ru", gettext("Русский")),
@@ -197,8 +250,57 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
 
-AUTHENTICATION_BACKENDS = [
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+# SOCIAL AUTH CONFIGURATION
+SOCIALACCOUNT_PROVIDERS = {  # noqa
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    },
+    #     "apple": {
+    #         "APP": {
+    #             # Your service identifier.
+    #             "client_id": env.str("SOCIALACCOUNT_APPLE_CLIENT_ID", "org.uicgroup.ayoluchun"),
+    #             # The Key ID (visible in the "View Key Details" page).
+    #             "secret": env.str("SOCIALACCOUNT_APPLE_SECRET", "6DP9RD92NY"),
+    #             # Member ID/App ID Prefix -- you can find it below your name
+    #             # at the top right corner of the page, or it’s your App ID
+    #             # Prefix in your App ID.
+    #             "key": env.str("SOCIALACCOUNT_APPLE_TEAM_ID", "KHGXWF53U9"),  # team id
+    #             # The certificate you downloaded when generating the key.
+    #             "certificate_key": """-----BEGIN PRIVATE KEY-----
+    # MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgL3oIve1fiKQJx0gl
+    # SLQkQG8zyhwhMbg/TSajVdVuURigCgYIKoZIzj0DAQehRANCAASplpoy6+148IwB
+    # CZahdME/LeHIziIHGTNIZQOAIRYdNQNugfiYZI9RnV/07wK0bYb8hWB65TXz5Kek
+    # szdGoZ+F
+    # -----END PRIVATE KEY-----""",
+    #         }
+    #     },
+}
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.google.GoogleOAuth2",
     "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
     "apps.users.authentications.UsernameAuthBackend",
     "apps.users.authentications.PhoneNumberAuthBackend",
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", "")  # noqa
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", "")  # noqa
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
 ]
+
+OAUTH_CALLBACK_URL = f"{env.str('HOST', '')}"
+
+REST_USE_JWT = True

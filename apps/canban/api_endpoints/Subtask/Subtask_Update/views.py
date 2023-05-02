@@ -11,8 +11,5 @@ class SubtaskUpdateAPIView(UpdateAPIView):
     serializer_class = SubtaskUpdateSerializer
     permission_classes = [IsAuthenticated, IsTheOwner]
 
-    def get_queryset(self):
-        return self.queryset.filter(task__column__board__user=self.request.user)
-
 
 __all__ = ["SubtaskUpdateAPIView"]

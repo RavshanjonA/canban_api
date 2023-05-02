@@ -6,4 +6,4 @@ from apps.canban.models import Board
 class BoardCreateSerializer(ModelSerializer):
     class Meta:
         model = Board
-        fields = ['title', 'description']
+        fields = ['title']
