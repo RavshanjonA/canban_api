@@ -29,7 +29,6 @@ class LoginForm(AuthenticationForm):
             return
         return super().clean()
 
-
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
