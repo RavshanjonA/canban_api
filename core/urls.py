@@ -1,8 +1,6 @@
 from django.conf import settings
-from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
-
 from django.urls import path, include, re_path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
@@ -24,6 +22,9 @@ urlpatterns = [
     re_path(r"^accounts/", include("allauth.urls"), name="socialaccount_signup"),
 ]
 urlpatterns += swagger_urlpatterns
+urlpatterns += [
+    path('captcha/', include('captcha.urls')),
+]
 # urlpatterns += i18n_patterns(path("admin/", admin.site.urls))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
