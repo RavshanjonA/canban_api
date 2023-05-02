@@ -1,14 +1,19 @@
-from django.db.models import CharField, TextField, ForeignKey, CASCADE
+from django.db.models import CharField, TextField, ForeignKey, CASCADE, ManyToManyField
 from django.utils.translation import gettext_lazy as _
+from rest_framework.fields import EmailField
 
 from apps.common.models import BaseModel
 
 
+class Collaborator(BaseModel):
+    user = ForeignKey('users.User', CASCADE, 'users')
+    board = ForeignKey('canban.Board', CASCADE, 'collabrators')
+
 class Board(BaseModel):
-    user = ForeignKey(verbose_name=_('Owner user'), to='users.User', related_name='boards', on_delete=CASCADE)
+    user = ForeignKey(verbose_name=_('Owner user'), to='users.User', related_name='my_boards', on_delete=CASCADE)
     title = CharField(verbose_name=_('Board title'), max_length=256, unique=True)
     description = TextField(verbose_name=_('Description'), null=True, blank=True)
-
+    collabrator = ManyToManyField(to='users.User', related_name='boards', through='canban.Collaborator')
     class Meta:
         verbose_name = _('Board')
         verbose_name_plural = _('Boards')
